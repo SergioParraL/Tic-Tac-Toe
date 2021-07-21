@@ -1,0 +1,51 @@
+
+h1, h3{
+	text-align: center;
+}
+
+.menu{
+	display: inline-flex;
+	justify-content: space-around;
+	width: 100%
+}
+
+.wrapper{
+	display: inline-flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+article{
+	width: 25em;
+	float: left;
+}
+.cell{
+	border: solid 2px black;
+	width: 7em;
+	height: 7em;
+	display: inline-flex;
+	margin: 0em;
+}	
+
+.cell:hover{
+	box-shadow: inset 5px 5px 15px #5CAC50, inset -5px -5px 5px #5CAC50 ;
+}
+
+.cell:active{
+	box-shadow: inset 5px 5px 15px #E4A2ED, inset -5px -5px 5px #E4A2ED;
+}
+
+.grading{
+	width: 14em;
+	height: 21em;
+	background: #3B3B3E;
+	margin-top: 1em;
+}
+.balls, .cruz{
+	background: #E6E7E3;
+	height: 37%;
+	width: 93%;
+	margin: .5em;
+	border-radius: .5em; 
+	text-align: center;
+}
