@@ -1,33 +1,64 @@
-let board = new Array(3)
+const $cell = document.querySelectorAll('.cell')
+let $arr = [[],[]]
+function Dashboard () {
+	for (var i = 0; i < $cell.length; i++) {
+		$cell[i].setAttribute('title','0')
+	}
+}
+	Dashboard()
 
-function cleanCell(x,y){
-	board[x][y] = 0
-	let cell = document.getElementById('c' + x + y)
-	cell.innerHTML = ' '
+function cell (x,y) {
+	let c = document.getElementById('c' + x + y)
+	let turn = turnPlay()
+	
+	if (c.getAttribute('title') == 0) {
+		
+		console.log(turn)
+		c.innerHTML = '<img src="img/' + turn + '.svg" alt="">'
+		
+		if (turn == 'ball'){
+			c.setAttribute('title','1')
+			$arr[0].push(c)
+		}else {
+			c.setAttribute('title','2')
+			$arr[1].push(c)
+
+		}
+	}else {
+		console.log('ocupado')
+		console.log($arr)
+	}
 }
 
-function cleanBoard() {
-	for(let x = 0; x < 3; x++){
-		for(let j = 0; j < 3; j++){
-			cleanCell(x,j)
+function turnPlay () {
+	let turn = 'ball', cont = 0
+	for (var i = 0; i < $cell.length; i++) {
+		if ($cell[i].getAttribute('title') != 0) {
+			cont++
 		}
+	}
+	if (cont == 0 || cont % 2 == 0) {
+		return turn
+	}else {
+		turn = 'cross'
+		return turn
 	}
 }
 
 
-function autoPlay() {
-	for (let i = 0; i < 3; i++) board[i] = new Array(3)
-	cleanBoard()
-	cleanCell()
-}
 
-autoPlay()
 
+// function play () {
+// }
+
+// play()
+
+
+// State of Cell:
 /*
-State of Cell:
 empty 	= 	0
-ball 	=	1
-cross 	=	2
+ball 	=	1 ==> Maquina
+cross 	=	2 ==> Usuario
 */
 // Que la maquina comience Primero siempre una casilla aleatoria
 // controlar Movimientos de cada jugador. 3 max C/U
