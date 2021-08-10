@@ -1,8 +1,12 @@
 const $cell = document.querySelectorAll('.cell')
+const $clean = document.getElementById('clean')
+$clean.addEventListener('click',Dashboard)
 let $arr = [[],[]]
+
 function Dashboard () {
 	for (var i = 0; i < $cell.length; i++) {
 		$cell[i].setAttribute('title','0')
+		$cell[i].innerHTML = ''
 	}
 }
 	Dashboard()
