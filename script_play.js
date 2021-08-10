@@ -1,9 +1,10 @@
 const $cell = document.querySelectorAll('.cell')
 const $clean = document.getElementById('clean')
 $clean.addEventListener('click',Dashboard)
-let $arr = [[],[]]
+let $arr = [[],[]], $turn = 'ball' 
 
 function Dashboard () {
+	$arr = [[],[]]
 	for (var i = 0; i < $cell.length; i++) {
 		$cell[i].setAttribute('title','0')
 		$cell[i].innerHTML = ''
@@ -13,50 +14,42 @@ function Dashboard () {
 
 function cell (x,y) {
 	let c = document.getElementById('c' + x + y)
-	let turn = turnPlay()
-	
+	// let turn = turnPlay()
+	// console.log('valor c ')
+	// console.log(c)
 	if (c.getAttribute('title') == 0) {
+		// console.log($turn)
+			c.innerHTML = '<img src="img/' + $turn + '.svg" alt="">'
 		
-		console.log(turn)
-		c.innerHTML = '<img src="img/' + turn + '.svg" alt="">'
-		
-		if (turn == 'ball'){
+		if ($turn == 'ball'){
 			c.setAttribute('title','1')
+			$turn = 'cross'
+			searchMove()
 			$arr[0].push(c)
 		}else {
 			c.setAttribute('title','2')
 			$arr[1].push(c)
+			$turn = 'ball'
 
 		}
 	}else {
-		console.log('ocupado')
-		console.log($arr)
+		cellBusy($arr,$turn)
 	}
 }
+function cellBusy (array,player) {
+	// console.log('ocupado')
+	console.log(player)
+	if(player == 'cross'){
+		let q = array[1].length
+		// console.log(array[1][q-1],player)
 
-function turnPlay () {
-	let turn = 'ball', cont = 0
-	for (var i = 0; i < $cell.length; i++) {
-		if ($cell[i].getAttribute('title') != 0) {
-			cont++
-		}
-	}
-	if (cont == 0 || cont % 2 == 0) {
-		return turn
 	}else {
-		turn = 'cross'
-		return turn
+		let q = array[0].length
+		// console.log(array[0][q-1],player)
+
 	}
 }
-
-
-
-
-// function play () {
-// }
-
-// play()
-
+	
 
 // State of Cell:
 /*
