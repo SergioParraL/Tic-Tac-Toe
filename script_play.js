@@ -1,7 +1,7 @@
 const $cell = document.querySelectorAll('.cell')
 const $clean = document.getElementById('clean')
 $clean.addEventListener('click',Dashboard)
-let $arr = [], $turn 
+let $arr,$turn 
 
 function Dashboard () {
 	for (var i = 0; i < $cell.length; i++) {
@@ -9,38 +9,36 @@ function Dashboard () {
 		$cell[i].innerHTML = ''
 	}
 }
+function checkCell (x,y) {
 
-function cell (x,y) {
+}
+
+function paintCell (x,y) {
 	let c = document.getElementById('c' + x + y)
+	turnCount($turn)
 	if (c.getAttribute('title') == 0) {
-		console.log($turn)
 		c.innerHTML = '<img src="img/' + $turn + '.svg" alt="">'
 		if ($turn == 'ball'){
 			c.setAttribute('title','1')
+			$arr[0].push(c)
+			// console.log($arr.pop())
 			$turn = 'cross'
-			$arr.push(c)
-			console.log($arr.pop())
 		}else {
 			c.setAttribute('title','2')
-			$arr.push(c)
+			$arr[1].push(c)
+			// console.log($arr.pop())
 			$turn = 'ball'
-			console.log($arr.pop())
 			searchMove()
 		}
-	}else {
-		cellBusy($arr,$turn)
 	}
 }
-function cellBusy (array,player) {
-	console.log(array.pop())
-}
+
+
 function autoPlay () {
 	$turn = 'ball'
-	$arr = []
-
+	$arr = [[],[]]
 	Dashboard()
 	searchMove()
-	// cell(1,2)
 
 }
 

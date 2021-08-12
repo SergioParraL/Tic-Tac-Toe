@@ -8,5 +8,7 @@ function searchMove () {
 		// console.log(c)
 		if(c.getAttribute('title') == 0) cellAvilable = true
 	}
-	cell(x,y)
+	paintCell(x,y)
 }
+
+// Check Manager
