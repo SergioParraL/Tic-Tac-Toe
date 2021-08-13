@@ -4,39 +4,71 @@ $clean.addEventListener('click',Dashboard)
 let $arr,$turn 
 
 function Dashboard () {
-	for (var i = 0; i < $cell.length; i++) {
+	$arr = [[],[]]
+
+	for (let i = 0; i < $cell.length; i++) {
 		$cell[i].setAttribute('title','0')
 		$cell[i].innerHTML = ''
 	}
 }
-function checkCell (x,y) {
-
-}
 
 function paintCell (x,y) {
 	let c = document.getElementById('c' + x + y)
-	turnCount($turn)
-	if (c.getAttribute('title') == 0) {
-		c.innerHTML = '<img src="img/' + $turn + '.svg" alt="">'
-		if ($turn == 'ball'){
-			c.setAttribute('title','1')
-			$arr[0].push(c)
-			// console.log($arr.pop())
-			$turn = 'cross'
-		}else {
-			c.setAttribute('title','2')
-			$arr[1].push(c)
-			// console.log($arr.pop())
-			$turn = 'ball'
-			searchMove()
+	let crossess = turnCount($turn)
+	if (crossess < 3){
+		if (c.getAttribute('title') == 0) {
+			c.innerHTML = '<img src="img/' + $turn + '.svg" alt="">'
+			if ($turn == 'ball'){
+				c.setAttribute('title','1')
+				$arr[0].push(c)
+				$turn = 'cross'
+			}else {
+				c.setAttribute('title','2')
+				$arr[1].push(c)
+				$turn = 'ball'
+				searchMove()
+			}
+		}
+	}else {
+		clearCell()
+	}
+}
+
+function clearCell () {
+	let c
+	let ballRandom = Math.round(Math.random()*2)
+	let cellRandom = $arr[0][ballRandom]
+	if($turn == 'ball'){
+		$arr[0].splice(ballRandom,1)
+		cellRandom.innerHTML = ' '
+		searchMove()
+		cellRandom.setAttribute('title','0')
+		$turn = 'cross'
+		console.log('saliendo ' + $turn)
+	}else {
+
+ 		for (var i = 0; i < $cell.length; i++) {
+		console.log($turn)
+			$cell[i].addEventListener('click', function () {
+				if (this.getAttribute('title') == 2) {
+					console.log('entrando')
+					this.setAttribute('title', '0')
+					this.innerHTML = ' '
+					console.log(this.getAttribute('id'))
+					$turn = 'ball'
+				}else {
+					console.log('retornando')
+					return clearCell($turn)				
+				}
+				// console.log('saliendo')
+			})
+		
 		}
 	}
 }
 
-
 function autoPlay () {
 	$turn = 'ball'
-	$arr = [[],[]]
 	Dashboard()
 	searchMove()
 
